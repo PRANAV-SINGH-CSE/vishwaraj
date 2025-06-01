@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Princess! 🎀</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap"
+    rel="stylesheet">
+  <style>
+    /* Your CSS (unchanged for brevity) */
+    :root {
+      --main-color: #fff5f8;
+      --accent-color: #ff69b4;
+      --text-color: #4d4d4d;
+      --heart-color: #ffb6c1;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: var(--main-color) url('https://www.transparenttextures.com/patterns/heart-wallpaper.png');
+      background-size: cover;
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .popup-active .content-wrapper {
+      filter: blur(40px);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      font-family: 'Pacifico', cursive;
+      font-size: 3rem;
+      color: var(--accent-color);
+      text-shadow: 2px 2px #ffc0cb;
+      position: relative;
+      animation: glitter 3s ease-in-out infinite;
+    }
+
+    @keyframes glitter {
+
+      0%,
+      100% {
+        text-shadow: 0 0 10px #ffcce6;
+      }
+
+      50% {
+        text-shadow: 0 0 20px #ff99cc;
+      }
+    }
+
+    .subtext {
+      text-align: center;
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+      padding: 0 10vw;
+      color: #d63384;
+      font-weight: 600;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 0 5vw 30px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 25px;
+      box-shadow: 0 6px 16px rgba(255, 105, 180, 0.2);
+      border: 5px dotted #ffb6c1;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: scale(1.06);
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: attr(data-ratio);
+      /* fallback */
+      object-fit: cover;
+      border-bottom: 3px dashed #ffccdd;
+    }
+
+    .card img {
+      width: 100%;
+      object-fit: cover;
+      border-bottom: 3px dashed #ffccdd;
+    }
+
+    /* Portrait 9:16 */
+    .portrait {
+      aspect-ratio: 9 / 16;
+      height: auto;
+    }
+
+    /* Landscape 3:2 */
+    .landscape {
+      aspect-ratio: 3 / 2;
+      height: auto;
+    }
+
+
+
+    .caption {
+      padding: 1rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #e75480;
+      background-color: #fff5fa;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #c27ba0;
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #fff0f8;
+      border-top: 3px dashed #f9c5d1;
+      width: 100%;
+    }
+
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .heart {
+      width: 20px;
+      height: 20px;
+      background: var(--heart-color);
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      animation: floatUp 8s linear infinite;
+      opacity: 0.7;
+      border-radius: 50% 50% 50% 0;
+    }
+
+    .heart::after,
+    .heart::before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background: var(--heart-color);
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        top: 100%;
+        transform: translateX(0) scale(0.5) rotate(0deg);
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        top: -10%;
+        transform: translateX(-20px) scale(1.2) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .sweet-line {
+      font-size: 1.3rem;
+      text-align: center;
+      color: #ff4f87;
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+
+    html,
+    body {
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        margin-top: 20px;
+      }
+
+      .gallery {
+        gap: 0;
+      }
+    }
+
+    #popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border: 4px solid #ff69b4;
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
+      z-index: 9999;
+      display: none;
+    }
+
+    #popup h2 {
+      color: #ff4f87;
+      font-family: 'Pacifico', cursive;
+      margin: 1px 0;
+    }
+
+    #popup button {
+      margin-top: 1rem;
+      background: #ff69b4;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #popup button:hover {
+      background: #ff3f99;
+    }
+
+    #happy-birthday-text {
+      font-size: 3rem;
+      text-align: center;
+      color: #ff1493;
+      font-weight: bold;
+      animation: floatUpDown 2s ease-in-out infinite;
+      position: relative;
+      z-index: 1000;
+    }
+
+    @keyframes floatUpDown {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="floating-hearts">
+    <div class="heart" style="left: 10%; animation-delay: 1s;"></div>
+    <div class="heart" style="left: 25%; animation-delay: 2s;"></div>
+    <div class="heart" style="left: 40%; animation-delay: 3s;"></div>
+    <div class="heart" style="left: 60%; animation-delay: 1.5s;"></div>
+    <div class="heart" style="left: 80%; animation-delay: 2.5s;"></div>
+    <div class="heart" style="left: 15%; animation-delay: 4s;"></div>
+    <div class="heart" style="left: 35%; animation-delay: 3.3s;"></div>
+    <div class="heart" style="left: 35%; animation-delay: 3.3s;"></div>
+    <div class="heart" style="left: 35%; animation-delay: 3.3s;"></div>
+    <div class="heart" style="left: 50%; animation-delay: 1.8s;"></div>
+    <div class="heart" style="left: 70%; animation-delay: 2.8s;"></div>
+    <div class="heart" style="left: 90%; animation-delay: 4.5s;"></div>
+    <div class="heart" style="left: 5%; animation-delay: 1.2s;"></div>
+    <div class="heart" style="left: 22%; animation-delay: 2.2s;"></div>
+    <div class="heart" style="left: 38%; animation-delay: 3.7s;"></div>
+    <div class="heart" style="left: 55%; animation-delay: 2s;"></div>
+    <div class="heart" style="left: 72%; animation-delay: 3s;"></div>
+    <div class="heart" style="left: 87%; animation-delay: 4.2s;"></div>
+  </div>
+
+  <!-- Popup -->
+  <div id="popup">
+    <h2>Happy</h2>
+    <h2>Birthday</h2>
+    <h2>Chutku</h2>
+    <p>May your day be filled with magic and sparkles!</p>
+    <button onclick="closePopup()">Thank You!</button>
+  </div>
+
+  <!-- Floating hearts -->
+  <div class="floating-hearts">
+    <!-- (hearts omitted here for brevity — keep yours as-is) -->
+  </div>
+
+  <!-- Audio -->
+  <audio id="bg-music" loop>
+    <source src="jil.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Main content -->
+  <div class="content-wrapper">
+    <div class="header" id="happy-birthday-text">🎀 Happy Birthday, Prince! 🎂</div>
+    <div class="subtext">Wishing you cupcakes, sparkles, and a sky full of pink clouds ☁️💫</div>
+    <div class="sweet-line">You're the reason hearts smile 💕</div>
+
+    <div class="gallery">
+      <!-- 9:16 Portrait Cards -->
+      <div class="card">
+        <img src="11.jpeg" alt="Portrait 1" class="portrait">
+        <div class="caption">Wishing you smiles every day 😊</div>
+      </div>
+      <div class="card">
+        <img src="14.jpeg" alt="Portrait 2" class="portrait">
+        <div class="caption">Shine bright like your soul ✨</div>
+      </div>
+      <div class="card">
+        <img src="16.jpeg" alt="Portrait 3" class="portrait">
+        <div class="caption">Queen of cuteness 👑</div>
+      </div>
+      <div class="card">
+        <img src="15.jpeg" alt="Portrait 4" class="portrait">
+        <div class="caption">Love from Grandpa❤️💕💖</div>
+      </div>
+
+      <!-- 3:2 Landscape Cards -->
+      <div class="card">
+        <img src="12.jpeg" alt="Landscape 1" class="landscape">
+        <div class="caption">Magical moments with you and family ✨</div>
+      </div>
+      <div class="card">
+        <img src="13.jpeg" alt="Landscape 2" class="landscape">
+        <div class="caption">Smile that lights up the world 🌍</div>
+      </div>
+      <div class="card">
+        <img src="17.jpeg" alt="Landscape 3" class="landscape">
+        <div class="caption">Forever fabulous with your bua 💅</div>
+      </div>
+
+
+    </div>
+
+    <div class="footer">
+      Made with sprinkles of love 🍓 for someone super special 💌<br>
+      Keep glowing, giggling, and being gorgeous 💫
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      // Show popup on page load
+      document.getElementById('popup').style.display = 'block';
+      document.body.classList.add('popup-active');
+    });
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+      document.body.classList.remove('popup-active');
+
+      // Play audio on user gesture
+      const audio = document.getElementById('bg-music');
+      audio.muted = false;
+      audio.src = "jil.mp3";  // reassign to force reload
+      audio.load();
+
+      audio.play().catch((err) => {
+        console.log("Audio playback failed:", err);
+      });
+    }
+  </script>
+</body>
+
+</html>
